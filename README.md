@@ -16,5 +16,5 @@ Just finished setting up db, next:
 
 - [x] Update schema to show files and folders
 - [x] Manually insert examples
-- [ ] Render them in the UI
+- [x] Render them in the UI
 - [ ] Push and make sure it all works in prod

@@ -4,7 +4,7 @@ import { files, folders } from "@/server/db/schema"
 
 export default function Page() {
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-4 bg-neutral-800 text-neutral-100">
       Seed Function
       <form
         action={async () => {

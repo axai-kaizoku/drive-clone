@@ -1,6 +1,4 @@
-import { File, Folder } from "@/app/_components/drive-contents"
-
-export const mockFolders: Folder[] = [
+export const mockFolders = [
   { id: "root", name: "root", type: "folder", parent: null },
   { id: "1", name: "Documents", type: "folder", parent: "root" },
   { id: "2", name: "Images", type: "folder", parent: "root" },
@@ -9,7 +7,7 @@ export const mockFolders: Folder[] = [
   { id: "8", name: "Presentations", type: "folder", parent: "3" },
 ]
 
-export const mockFiles: File[] = [
+export const mockFiles = [
   {
     id: "tempvid",
     name: "2024-02-17-14:23:45.mp4x",
