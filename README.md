@@ -14,7 +14,7 @@ Just finished setting up db, next:
 - [x] Update local mock data to show files and folders
 - [x] Check them out in UI
 
-- [ ] Update schema to show files and folders
-- [ ] Manually insert examples
+- [x] Update schema to show files and folders
+- [x] Manually insert examples
 - [ ] Render them in the UI
 - [ ] Push and make sure it all works in prod
