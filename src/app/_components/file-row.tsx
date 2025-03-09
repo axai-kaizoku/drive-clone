@@ -1,7 +1,6 @@
-import type { File, Folder } from "@/lib/mock-data"
-
 import { FolderIcon, FileIcon } from "lucide-react"
 import Link from "next/link"
+import { File, Folder } from "./drive-contents"
 
 export const FileRow = ({ file }: { file: File }) => {
   return (

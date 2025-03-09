@@ -1,18 +1,4 @@
-export type File = {
-  id: string
-  name: string
-  type: "file" | "folder"
-  url: string
-  parent: string
-  size: string
-}
-
-export type Folder = {
-  id: string
-  name: string
-  type: "folder"
-  parent: string | null
-}
+import { File, Folder } from "@/app/_components/drive-contents"
 
 export const mockFolders: Folder[] = [
   { id: "root", name: "root", type: "folder", parent: null },
