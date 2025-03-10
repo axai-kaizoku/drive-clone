@@ -10,6 +10,6 @@
 
 ## 9-3-25
 
-- [ ] Change folders to link components, remove all client states
-- [ ] Clean up the database and data fetching patterns.
+- [x] Change folders to link components, remove all client states
+- [x] Clean up the database and data fetching patterns.
 - [ ] Real homepage
