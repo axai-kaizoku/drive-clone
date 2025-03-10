@@ -1,8 +1,8 @@
+import { DB_FileType, DB_FolderType } from "@/server/db/schema"
 import { FolderIcon, FileIcon } from "lucide-react"
 import Link from "next/link"
-import { File, Folder } from "./drive-contents"
 
-export const FileRow = ({ file }: { file: File }) => {
+export const FileRow = ({ file }: { file: DB_FileType }) => {
   return (
     <li
       key={file.id}
@@ -26,7 +26,7 @@ export const FileRow = ({ file }: { file: File }) => {
   )
 }
 
-export const FolderRow = ({ folder }: { folder: Folder }) => {
+export const FolderRow = ({ folder }: { folder: DB_FolderType }) => {
   return (
     <li
       key={folder.id}

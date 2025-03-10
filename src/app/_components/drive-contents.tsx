@@ -2,22 +2,18 @@
 
 import { ChevronRight } from "lucide-react"
 import { FileRow, FolderRow } from "./file-row"
-import type { files_table, folders_table } from "@/server/db/schema"
+import type { DB_FileType, DB_FolderType } from "@/server/db/schema"
 import Link from "next/link"
 import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs"
-
-export type File = typeof files_table.$inferSelect
-export type Folder = typeof folders_table.$inferSelect
+import { UploadButton } from "@/components/uploadthing"
+import { useRouter } from "next/navigation"
 
 export default function DriveContents(props: {
-  files: File[]
-  folders: Folder[]
-  parents: Folder[]
+  files: DB_FileType[]
+  folders: DB_FolderType[]
+  parents: DB_FolderType[]
 }) {
-  const handleUpload = () => {
-    alert("Upload functionality would be implemented here")
-  }
-
+  const router = useRouter()
   return (
     <div className="min-h-screen bg-gray-900 p-8 text-gray-100">
       <div className="mx-auto max-w-6xl">
@@ -64,6 +60,10 @@ export default function DriveContents(props: {
             ))}
           </ul>
         </div>
+        <UploadButton
+          endpoint="imageUploader"
+          onClientUploadComplete={() => router.refresh()}
+        />
       </div>
     </div>
   )
