@@ -3,11 +3,11 @@
 import { Upload, ChevronRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { FileRow, FolderRow } from "./file-row"
-import type { files, folders } from "@/server/db/schema"
+import type { files_table, folders_table } from "@/server/db/schema"
 import Link from "next/link"
 
-export type File = typeof files.$inferSelect
-export type Folder = typeof folders.$inferSelect
+export type File = typeof files_table.$inferSelect
+export type Folder = typeof folders_table.$inferSelect
 
 export default function DriveContents(props: {
   files: File[]

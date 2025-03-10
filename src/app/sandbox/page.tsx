@@ -1,6 +1,6 @@
 import { mockFiles, mockFolders } from "@/lib/mock-data"
 import { db } from "@/server/db"
-import { files, folders } from "@/server/db/schema"
+import { files_table, folders_table } from "@/server/db/schema"
 
 export default function Page() {
   return (
@@ -12,7 +12,7 @@ export default function Page() {
 
           console.log("heyy biro")
 
-          const folderInsert = await db.insert(folders).values(
+          const folderInsert = await db.insert(folders_table).values(
             mockFolders.map((folder, idx) => ({
               id: idx + 1,
               name: folder.name,
@@ -21,7 +21,7 @@ export default function Page() {
           )
           console.log({ folderInsert })
 
-          const fileInsert = await db.insert(files).values(
+          const fileInsert = await db.insert(files_table).values(
             mockFiles.map((file, idx) => ({
               id: idx + 1,
               name: file.name,
