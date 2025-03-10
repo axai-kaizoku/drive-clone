@@ -10,7 +10,8 @@
 
 ## 10-3-25
 
-- [ ] Real homepage
-- [ ] Upload files to right folder
+- [x] Add "ownership" to files
+- [x] Upload files to right folder
 - [ ] Delete files button
 - [ ] Allow files that aren't images to be uploaded
+- [ ] Real homepage

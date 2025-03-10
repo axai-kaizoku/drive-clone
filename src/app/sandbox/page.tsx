@@ -1,8 +1,22 @@
 import { mockFiles, mockFolders } from "@/lib/mock-data"
 import { db } from "@/server/db"
 import { files_table, folders_table } from "@/server/db/schema"
+import { auth } from "@clerk/nextjs/server"
+import { eq } from "drizzle-orm"
 
-export default function Page() {
+export default async function Page() {
+  const user = await auth()
+
+  if (!user.userId) {
+    throw new Error("User not found")
+  }
+
+  const folders = await db
+    .select()
+    .from(folders_table)
+    .where(eq(folders_table.ownerId, user.userId))
+
+  console.log(folders)
   return (
     <div className="flex flex-col gap-4 bg-neutral-800 text-neutral-100">
       Seed Function
@@ -10,28 +24,26 @@ export default function Page() {
         action={async () => {
           "use server"
 
-          console.log("heyy biro")
+          const user = await auth()
+          if (!user.userId) {
+            throw new Error("User not found")
+          }
 
-          const folderInsert = await db.insert(folders_table).values(
-            mockFolders.map((folder, idx) => ({
-              id: idx + 1,
-              name: folder.name,
-              parent: idx !== 0 ? 1 : null,
-            }))
-          )
-          console.log({ folderInsert })
+          const rootFolder = await db
+            .insert(folders_table)
+            .values({
+              name: "root",
+              ownerId: user.userId,
+              parent: null,
+            })
+            .$returningId()
 
-          const fileInsert = await db.insert(files_table).values(
-            mockFiles.map((file, idx) => ({
-              id: idx + 1,
-              name: file.name,
-              size: 5000,
-              url: file.url,
-              parent: idx % 3,
-            }))
-          )
-
-          console.log({ fileInsert })
+          const insertableFolders = mockFolders.map((folder) => ({
+            name: folder.name,
+            ownerId: user.userId,
+            parent: rootFolder[0]?.id,
+          }))
+          await db.insert(folders_table).values(insertableFolders)
         }}
       >
         <button type="submit">Seed</button>
