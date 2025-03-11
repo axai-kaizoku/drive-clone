@@ -7,11 +7,5 @@
 - [x] Add auth
 - [x] Add file uploading
 - [ ] Add analytics
-
-## 10-3-25
-
-- [x] Add "ownership" to files
-- [x] Upload files to right folder
-- [ ] Delete files button
-- [x] Allow files that aren't images to be uploaded
-- [ ] Real homepage
+- [ ] Add delete
+- [ ] Real homepage + onboarding (creating root folder)
