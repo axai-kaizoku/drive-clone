@@ -30,10 +30,15 @@ export const QUERIES = {
       .select()
       .from(foldersSchema)
       .where(eq(foldersSchema.parent, folderId))
+      .orderBy(foldersSchema.name)
   },
 
   getFiles: function (folderId: number) {
-    return db.select().from(filesSchema).where(eq(filesSchema.parent, folderId))
+    return db
+      .select()
+      .from(filesSchema)
+      .where(eq(filesSchema.parent, folderId))
+      .orderBy(filesSchema.name)
   },
 
   getFolderById: async function (folderId: number) {
@@ -52,6 +57,8 @@ export const MUTATIONS = {
       size: number
       url: string
       parent: number
+      fileKey: string
+      fileType: string
     }
     userId: string
   }) {

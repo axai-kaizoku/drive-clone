@@ -1,5 +1,4 @@
 export const mockFolders = [
-  { id: "root", name: "root", type: "folder", parent: null },
   { id: "1", name: "Documents", type: "folder", parent: "root" },
   { id: "2", name: "Images", type: "folder", parent: "root" },
   { id: "axai", name: "Personal", type: "folder", parent: "2" },
