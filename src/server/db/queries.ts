@@ -2,10 +2,11 @@ import "server-only"
 
 import { db } from "@/server/db"
 import {
+  DB_FolderType,
   files_table as filesSchema,
   folders_table as foldersSchema,
 } from "@/server/db/schema"
-import { eq } from "drizzle-orm"
+import { and, eq, isNull } from "drizzle-orm"
 
 export const QUERIES = {
   getAllParentsForFolder: async function (folderId: number) {
@@ -48,6 +49,17 @@ export const QUERIES = {
       .where(eq(foldersSchema.id, folderId))
     return folder[0]
   },
+
+  getRootFolderForUser: async function (userId: string) {
+    const folder = await db
+      .select()
+      .from(foldersSchema)
+      .where(
+        and(eq(foldersSchema.ownerId, userId), isNull(foldersSchema.parent))
+      )
+
+    return folder[0]
+  },
 }
 
 export const MUTATIONS = {
@@ -65,5 +77,11 @@ export const MUTATIONS = {
     return await db
       .insert(filesSchema)
       .values({ ...input.file, ownerId: input.userId })
+  },
+
+  createFolder: async function (input: {
+    folder: { ownerId: string; name: string; parent: number | null }
+  }) {
+    return await db.insert(foldersSchema).values({ ...input.folder })
   },
 }
