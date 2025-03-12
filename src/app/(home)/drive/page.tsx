@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button"
 import { MUTATIONS, QUERIES } from "@/server/db/queries"
 import { auth } from "@clerk/nextjs/server"
 import { redirect } from "next/navigation"
@@ -12,9 +13,25 @@ export default async function Page() {
   const rootFolder = await QUERIES.getRootFolderForUser(session.userId)
 
   if (!rootFolder) {
-    await MUTATIONS.createFolder({
-      folder: { name: "root", ownerId: session.userId, parent: null },
-    })
+    return (
+      <form
+        action={async () => {
+          "use server"
+
+          const session = await auth()
+
+          if (!session.userId) {
+            return redirect("/sign-in")
+          }
+
+          const rootFolderId = await MUTATIONS.onboardUser(session.userId)
+
+          return redirect(`/f/${rootFolderId}`)
+        }}
+      >
+        <Button>Create new Drive</Button>
+      </form>
+    )
   }
 
   return redirect(`/f/${rootFolder?.id}`)
